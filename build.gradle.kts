@@ -13,10 +13,19 @@ val quarkusPlatformGroupId: String by project
 val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
+/**
+ * Dependency Versions
+ */
+val testContainersVersion = "1.17.6"
+
 dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
+
+    // Flyway
     implementation("io.quarkus:quarkus-flyway")
+    implementation("io.quarkus:quarkus-jdbc-postgresql")
+
     implementation("io.quarkus:quarkus-hibernate-orm-panache-kotlin")
     implementation("io.quarkus:quarkus-smallrye-openapi")
     implementation("io.quarkus:quarkus-kotlin")
@@ -25,8 +34,15 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-hibernate-orm")
     implementation("io.quarkus:quarkus-resteasy-reactive")
+
+    // Basic Test Dependencies for quarkus
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+
+    // Testcontainers dependencies for PostgreSQL
+    testImplementation("org.testcontainers:postgresql:$testContainersVersion")
+    testImplementation("org.testcontainers:junit-jupiter:$testContainersVersion")
+    testImplementation("org.testcontainers:database-commons:$testContainersVersion")
 }
 
 group = "io.tecture"
