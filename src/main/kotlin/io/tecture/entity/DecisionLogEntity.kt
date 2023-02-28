@@ -9,7 +9,7 @@ import javax.persistence.*
 open class DecisionLogEntity() : PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    open var id: Long? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_system_id")

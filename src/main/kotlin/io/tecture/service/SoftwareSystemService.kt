@@ -1,5 +1,6 @@
 package io.tecture.service
 
+import io.tecture.dtos.CreateSystemRequestDto
 import io.tecture.entity.SoftwareSystemEntity
 import io.tecture.repository.SoftwareSystemRepository
 import java.util.*
@@ -42,5 +43,14 @@ class SoftwareSystemService {
      */
     fun findAll(): List<SoftwareSystemEntity> {
         return softwareSystemRepository.listAll()
+    }
+
+    fun create(softwareSystem: CreateSystemRequestDto): SoftwareSystemEntity {
+        val softwareSystemEntity = SoftwareSystemEntity(
+            UUID.randomUUID(),
+            softwareSystem.name,
+            null
+        )
+        return create(softwareSystemEntity)
     }
 }
