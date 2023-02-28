@@ -36,4 +36,11 @@ class SoftwareSystemService {
     fun delete(uuid: UUID) {
         softwareSystemRepository.delete("uuid", uuid)
     }
+
+    /**
+     * Find all software systems
+     */
+    fun findAll(): List<SoftwareSystemEntity> {
+        return softwareSystemRepository.listAll()
+    }
 }

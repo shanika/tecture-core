@@ -6,18 +6,22 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "software_system")
-open class SoftwareSystemEntity(
-
+open class SoftwareSystemEntity() : PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var id: Long? = null,
+    var id: Long? = null
 
     @Column(nullable = false, unique = true)
-    open var uuid: UUID = UUID.randomUUID(),
+    lateinit var uuid: UUID
 
     @Column(nullable = false)
-    open var name: String = "",
+    lateinit var name: String
 
     @Column(nullable = true)
-    open var description: String? = null,
-) : PanacheEntityBase
+    var description: String? = null
+    constructor(uuid: UUID, name: String, description: String?) : this() {
+        this.uuid = uuid
+        this.name = name
+        this.description = description
+    }
+}

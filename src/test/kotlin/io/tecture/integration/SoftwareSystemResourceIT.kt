@@ -25,7 +25,7 @@ import javax.inject.Inject
 class SoftwareSystemResourceIT() {
 
     @Inject
-    lateinit var softwareSystemService: SoftwareSystemService;
+    lateinit var softwareSystemService: SoftwareSystemService
 
     val uuid: UUID = UUID.randomUUID()
 
@@ -35,7 +35,7 @@ class SoftwareSystemResourceIT() {
         RestAssured.filters(RequestLoggingFilter(), ResponseLoggingFilter())
 
         softwareSystemService.create(
-            SoftwareSystemEntity( null,
+            SoftwareSystemEntity(
                 uuid,
                 "Software System 1",
                 "Software System 1 Description"

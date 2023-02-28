@@ -14,8 +14,22 @@ class SoftwareSystemResource @Inject constructor(private val softwareSystemServi
     @Path("/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     fun get(@PathParam("uuid") uuid: UUID): SoftwareSystem {
-        val softwareSystemEntity = softwareSystemService.findByUuid(uuid) ?: throw NotFoundException("Software system not found with UUID: $uuid")
-        return SoftwareSystem(softwareSystemEntity.uuid, softwareSystemEntity.name, softwareSystemEntity.description, emptyList())
+        val softwareSystemEntity = softwareSystemService.findByUuid(uuid)
+            ?: throw NotFoundException("Software system not found with UUID: $uuid")
+        return SoftwareSystem(softwareSystemEntity.uuid, softwareSystemEntity.name, softwareSystemEntity.description)
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getAll(): List<SoftwareSystem> {
+        val softwareSystemEntities = softwareSystemService.findAll()
+        return softwareSystemEntities.map { softwareSystemEntity ->
+            SoftwareSystem(
+                softwareSystemEntity.uuid,
+                softwareSystemEntity.name,
+                softwareSystemEntity.description
+            )
+        }
     }
 
 }
